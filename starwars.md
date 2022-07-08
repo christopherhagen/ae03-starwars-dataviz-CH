@@ -66,16 +66,63 @@ or remove the `eval` option altogether since it’s set to `TRUE` by
 default.)
 
 ``` r
-ggplot(starwars, aes(___)) +
-  geom___
+ggplot(starwars, aes(y = hair_color)) +
+  geom_bar()
 ```
+
+![](starwars_files/figure-gfm/barplot-1.png)<!-- -->
 
 ### Pick a single numerical variable and make a histogram of it.
 
 (This time no starter code is provided, you’re on your own!)
 
+``` r
+ggplot(starwars, aes(x = height, fill = "#30509C", color = "black")) +
+  geom_histogram(binwidth = 50, color = "black") +
+labs(
+    title = "Height of Star Wars Characters",
+    x = "Height (m)", 
+    y = "Frequency"
+ ) +
+guides(fill = "none")
+```
+
+    ## Warning: Removed 6 rows containing non-finite values (stat_bin).
+
+![](starwars_files/figure-gfm/histogram-1.png)<!-- -->
+
 ### Pick a numerical variable and a categorical variable and make a visualisation (you pick the type!) to visualise the relationship between the two variables. Along with your code and output, provide an interpretation of the visualisation.
+
+``` r
+library(ggridges)
+ggplot(starwars, aes(x = height, y = gender, fill = "#30509C")) + 
+  geom_density_ridges(alpha = 0.5)+
+  guides(fill = "none")
+```
+
+    ## Picking joint bandwidth of 3.93
+
+    ## Warning: Removed 6 rows containing non-finite values (stat_density_ridges).
+
+![](starwars_files/figure-gfm/num-cat-1.png)<!-- -->
 
 ### Pick two categorical variables and make a visualisation to visualise the relationship between the two variables. Along with your code and output, provide an interpretation of the visualisation.
 
+``` r
+ggplot(starwars, aes(x = sex, fill = gender)) +
+  geom_bar(position = "fill")
+```
+
+![](starwars_files/figure-gfm/cat-cat-1.png)<!-- -->
+
 ### Pick two numerical variables and two categorical variables and make a visualisation that incorportes all of them and provide an interpretation with your answer.
+
+``` r
+ggplot(starwars, aes(x = height, y = mass, color = sex)) +
+  geom_point() +
+  facet_grid(. ~ gender)
+```
+
+    ## Warning: Removed 28 rows containing missing values (geom_point).
+
+![](starwars_files/figure-gfm/multi-1.png)<!-- -->
